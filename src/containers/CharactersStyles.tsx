@@ -1,12 +1,27 @@
 import React from "react";
 
-import CharactersList from "../components/CharactersList";
+import CharactersDetails from "../components/CharactersDetails";
+import { CharactersType } from "../types";
 
-const CharactersStyles: React.FC = (): React.ReactElement => {
+export type CharactersStylesProps = {
+  characters: Array<CharactersType>;
+  setSearchValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const CharactersStyles: React.FC<CharactersStylesProps> = ({
+  characters,
+  setSearchValue
+}): React.ReactElement => {
   return (
     <>
       <h1>list styles</h1>
-      <CharactersList />
+      <input placeholder="search by name" onChange={setSearchValue} />
+
+      {characters.map(
+        (character: CharactersType): React.ReactElement => (
+          <CharactersDetails key={character.mal_id} character={character} />
+        )
+      )}
     </>
   );
 };
