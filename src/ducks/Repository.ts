@@ -12,7 +12,7 @@ const Repository: RepositoryType = class {
   public static fetch = async (): Promise<Array<CharactersType>> => {
     const {
       data: { characters },
-    }: AxiosResponse = await axios.get<Array<CharactersType>>('/anime/31772/characters_staff')
+    }: AxiosResponse = await axios.get<Array<CharactersType>>('/anime/34134/characters_staff')
 
     return characters
   }
