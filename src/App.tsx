@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 
 import { actions } from './ducks'
-import { getCharactersList } from './ducks/selectors'
+import { getCharactersList, getIsLoading } from './ducks/selectors'
 import { CharactersType } from './types'
 import CharactersStyles from './containers/CharactersStyles'
 import CharactersDetails from './components/CharactersDetails'
@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
 const App: React.FC = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch()
   const characters: Array<CharactersType> = useSelector(getCharactersList)
+  const isLoading: boolean = useSelector(getIsLoading)
 
   useEffect((): void => {
     dispatch(actions.fetchCharacters())
@@ -38,7 +39,7 @@ const App: React.FC = (): React.ReactElement => {
       <GlobalStyle />
       <Switch>
         <Route exact path="/">
-          <CharactersStyles characters={characters} setSearchValue={setSearchValue} />
+          <CharactersStyles isLoading={isLoading} characters={characters} setSearchValue={setSearchValue} />
         </Route>
         <Route path="/character/:id" component={CharactersDetails} />
       </Switch>

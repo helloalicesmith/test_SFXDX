@@ -3,11 +3,14 @@ import LazyLoad from 'react-lazyload'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import Loader from '../../components/Loader'
 import { CharactersType } from '../../types'
 
 export type CharactersStylesProps = {
   characters: Array<CharactersType>
   setSearchValue: (event: React.ChangeEvent<HTMLInputElement>) => void
+
+  isLoading: boolean
 }
 
 const Wrapper = styled.div`
@@ -30,7 +33,11 @@ const Name = styled.h3`
   margin: 0;
 `
 
-const CharactersStyles: React.FC<CharactersStylesProps> = ({ characters, setSearchValue }): React.ReactElement => {
+const CharactersStyles: React.FC<CharactersStylesProps> = ({
+  characters,
+  setSearchValue,
+  isLoading,
+}): React.ReactElement => {
   return (
     <>
       <h1>
@@ -44,20 +51,23 @@ const CharactersStyles: React.FC<CharactersStylesProps> = ({ characters, setSear
       </h1>
       <input placeholder="search by name" onChange={setSearchValue} />
 
-      <Wrapper>
-        {characters.map(
-          (character: CharactersType): React.ReactElement => (
-            <Link to={`/character/${character.mal_id}`} key={character.mal_id} style={{ textDecoration: 'none' }}>
-              <Card>
-                <Name>{character.name}</Name>
-                <LazyLoad height={350} offset={-100}>
-                  <img src={character.image_url} alt="character" />
-                </LazyLoad>
-              </Card>
-            </Link>
-          ),
-        )}
-      </Wrapper>
+      {isLoading && <Loader />}
+      {!isLoading && (
+        <Wrapper>
+          {characters.map(
+            (character: CharactersType): React.ReactElement => (
+              <Link to={`/character/${character.mal_id}`} key={character.mal_id} style={{ textDecoration: 'none' }}>
+                <Card>
+                  <Name>{character.name}</Name>
+                  <LazyLoad height={350} offset={-100}>
+                    <img src={character.image_url} alt="character" />
+                  </LazyLoad>
+                </Card>
+              </Link>
+            ),
+          )}
+        </Wrapper>
+      )}
     </>
   )
 }
