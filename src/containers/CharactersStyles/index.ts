@@ -1,1 +1,1 @@
-export { default } from './CharactersStyles';
+export { default } from './CharactersStyles'

@@ -1,33 +1,27 @@
-import { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios'
 
-import axios from '../utils/axios';
-import { CharactersType, CharacterDetailsType } from '../types';
+import axios from '../utils/axios'
+import { CharactersType, CharacterDetailsType } from '../types'
 
 export interface RepositoryType {
-  fetch(): Promise<Array<CharactersType>>;
-  fetchCharacter(id: string): Promise<CharacterDetailsType>;
+  fetch(): Promise<Array<CharactersType>>
+  fetchCharacter(id: string): Promise<CharacterDetailsType>
 }
 
 const Repository: RepositoryType = class {
   public static fetch = async (): Promise<Array<CharactersType>> => {
     const {
       data: { characters },
-    }: AxiosResponse = await axios.get<Array<CharactersType>>(
-      '/anime/1/characters_staff',
-    );
+    }: AxiosResponse = await axios.get<Array<CharactersType>>('/anime/31772/characters_staff')
 
-    return characters;
-  };
+    return characters
+  }
 
-  public static fetchCharacter = async (
-    id: string,
-  ): Promise<CharacterDetailsType> => {
-    const { data }: AxiosResponse = await axios.get<CharacterDetailsType>(
-      `/character/${id}`,
-    );
+  public static fetchCharacter = async (id: string): Promise<CharacterDetailsType> => {
+    const { data }: AxiosResponse = await axios.get<CharacterDetailsType>(`/character/${id}`)
 
-    return data;
-  };
-};
+    return data
+  }
+}
 
-export default Repository;
+export default Repository

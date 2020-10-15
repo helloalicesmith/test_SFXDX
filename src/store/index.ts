@@ -1,18 +1,15 @@
-import { createStore, applyMiddleware } from 'redux';
-import { createLogger } from 'redux-logger';
-import createSagaMiddleware from 'redux-saga';
+import { createStore, applyMiddleware } from 'redux'
+import { createLogger } from 'redux-logger'
+import createSagaMiddleware from 'redux-saga'
 
-import charactersReducer from '../ducks';
-import { mySaga } from '../ducks/sagas';
+import charactersReducer from '../ducks'
+import { mySaga } from '../ducks/sagas'
 
-const logger = createLogger();
+const logger = createLogger()
 
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(
-  charactersReducer,
-  applyMiddleware(logger, sagaMiddleware),
-);
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(charactersReducer, applyMiddleware(logger, sagaMiddleware))
 
-sagaMiddleware.run(mySaga);
+sagaMiddleware.run(mySaga)
 
-export { store };
+export { store }

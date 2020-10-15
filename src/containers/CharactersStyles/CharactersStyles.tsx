@@ -1,18 +1,15 @@
-import React from 'react';
-import LazyLoad from 'react-lazyload';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import LazyLoad from 'react-lazyload'
+import { Link } from 'react-router-dom'
 
-import { CharactersType } from '../../types';
+import { CharactersType } from '../../types'
 
 export type CharactersStylesProps = {
-  characters: Array<CharactersType>;
-  setSearchValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+  characters: Array<CharactersType>
+  setSearchValue: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
 
-const CharactersStyles: React.FC<CharactersStylesProps> = ({
-  characters,
-  setSearchValue,
-}): React.ReactElement => (
+const CharactersStyles: React.FC<CharactersStylesProps> = ({ characters, setSearchValue }): React.ReactElement => (
   <>
     <h1>list styles</h1>
     <input placeholder="search by name" onChange={setSearchValue} />
@@ -28,6 +25,6 @@ const CharactersStyles: React.FC<CharactersStylesProps> = ({
       ),
     )}
   </>
-);
+)
 
-export default CharactersStyles;
+export default CharactersStyles

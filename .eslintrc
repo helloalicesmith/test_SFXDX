@@ -1,0 +1,56 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": { "ecmaVersion": 2020, "sourceType": "module" },
+  "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks", "import"],
+  "settings": {
+    "pragma": "React",
+    "version": "detect",
+    "import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] }
+  },
+  "rules": {
+    "no-use-before-define": 0,
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-curly-newline": "off",
+    "react/prop-types": 0,
+    "react/button-has-type": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/static-property-placement": 0,
+    "react/sort-comp": 0,
+    "react/no-did-update-set-state": 0,
+    "react/state-in-constructor": 0,
+    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/no-unused-vars": [1, { "args": "all", "argsIgnorePattern": "_", "ignoreRestSiblings": true }],
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/camelcase": 0,
+    "@typescript-eslint/explicit-module-boundary-types": [0],
+    "import/order": [
+      2,
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always"
+      }
+    ],
+    "import/no-extraneous-dependencies": 0,
+    "import/prefer-default-export": 0,
+    "import/export": 0,
+    "import/named": 0,
+    "import/no-unresolved": 0,
+    "import/no-cycle": 0,
+    "import/extensions": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "camelcase": "off",
+    "no-named-as-default-member": 0,
+    "no-shadow": 0,
+    "semicolon": 0,
+    "no-underscore-dangle": "off",
+    "global-require": 0,
+    "no-param-reassign": 0
+  }
+}
