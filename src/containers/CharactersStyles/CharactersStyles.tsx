@@ -50,7 +50,7 @@ const CharactersStyles: React.FC<CharactersStylesProps> = ({ characters, setSear
             <Link to={`/character/${character.mal_id}`} key={character.mal_id} style={{ textDecoration: 'none' }}>
               <Card>
                 <Name>{character.name}</Name>
-                <LazyLoad offset={-100}>
+                <LazyLoad height={350} offset={-100}>
                   <img src={character.image_url} alt="character" />
                 </LazyLoad>
               </Card>
