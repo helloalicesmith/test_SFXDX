@@ -7,6 +7,7 @@ export interface CharactersState {
   characters: Array<CharactersType>
   characterDetails: CharacterDetailsType | null
   isDetailsLoading: boolean
+
   searchValue: string
 }
 

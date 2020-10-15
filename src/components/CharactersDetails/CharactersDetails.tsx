@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Dispatch } from 'redux'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, RouteComponentProps } from 'react-router-dom'
-import styled from 'styled-components'
 
 import { randomInteger } from '../../utils/randomInt'
 import { colorArr } from '../../constants'
@@ -11,38 +10,22 @@ import { actions } from '../../ducks'
 import { getCharacterDetails, getIsDetailsLoading } from '../../ducks/selectors'
 import { CharactersType, CharacterDetailsType } from '../../types'
 
+import { Wrapper, Button, P } from './styles'
+
 export type RouterProps = {
   id: string
 }
 
 export interface CharactersDetailsProps extends RouteComponentProps<RouterProps> {
-  character?: CharactersType
+  character: CharactersType
 }
-
-export type ColorProps = { color: string }
-
-const Wrapper = styled.div`
-  text-align: center;
-  background: ${(props: ColorProps) => props.color};
-`
-
-const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid #000;
-  padding: 0.25em 1em;
-  color: #000;
-`
-const P = styled.p`
-  white-space: pre-wrap;
-`
 
 const CharactersDetails: React.FC<CharactersDetailsProps> = (props): React.ReactElement => {
   const dispatch: Dispatch = useDispatch()
   const characterDetails: CharacterDetailsType | null = useSelector(getCharacterDetails)
   const isLoading: boolean = useSelector(getIsDetailsLoading)
 
-  useEffect(() => {
+  useEffect((): void => {
     const { id } = props.match.params
 
     dispatch(actions.fetchCharacterDetails(id))

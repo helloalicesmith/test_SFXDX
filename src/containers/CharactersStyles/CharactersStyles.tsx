@@ -1,43 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Dispatch } from 'redux'
+import { useDispatch, useSelector } from 'react-redux'
 import LazyLoad from 'react-lazyload'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 
+import { getCharactersList, getIsLoading } from '../../ducks/selectors'
 import Loader from '../../components/Loader'
 import { CharactersType } from '../../types'
+import { actions } from '../../ducks'
 
-export type CharactersStylesProps = {
-  characters: Array<CharactersType>
-  setSearchValue: (event: React.ChangeEvent<HTMLInputElement>) => void
+import { Wrapper, Card, Name } from './styles'
 
-  isLoading: boolean
-}
+const CharactersStyles: React.FC = (): React.ReactElement => {
+  const dispatch: Dispatch = useDispatch()
+  const characters: Array<CharactersType> = useSelector(getCharactersList)
+  const isLoading: boolean = useSelector(getIsLoading)
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`
-const Card = styled.div`
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  flex: 3;
-  text-align: center;
-  margin: 1rem;
-  &:hover {
-    opacity: 0.9;
-    transition: 0.1s;
+  useEffect((): void => {
+    dispatch(actions.fetchCharacters())
+  }, [])
+
+  const setSearchValue = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const { value } = event.target
+
+    dispatch(actions.setSearchValue(value))
   }
-`
 
-const Name = styled.h3`
-  color: #000;
-  margin: 0;
-`
-
-const CharactersStyles: React.FC<CharactersStylesProps> = ({
-  characters,
-  setSearchValue,
-  isLoading,
-}): React.ReactElement => {
   return (
     <>
       <h1>
