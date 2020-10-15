@@ -1,22 +1,26 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { CharactersType } from "../types";
+import { CharactersType, CharacterDetailsType } from '../types';
 
 export interface CharactersState {
   isLoading: boolean;
   characters: Array<CharactersType>;
+  characterDetails: CharacterDetailsType | null;
+  isDetailsLoading: boolean;
   searchValue: string;
 }
 
 export const initialState: CharactersState = {
   isLoading: false,
   characters: [],
+  characterDetails: null,
+  isDetailsLoading: false,
 
-  searchValue: ""
+  searchValue: '',
 };
 
 const characters = createSlice({
-  name: "@@characters",
+  name: '@@characters',
   initialState,
   reducers: {
     fetchCharacters: (state: CharactersState): void => {
@@ -24,7 +28,7 @@ const characters = createSlice({
     },
     fetchCharactersSuccess: (
       state: CharactersState,
-      action: PayloadAction<Array<CharactersType>>
+      action: PayloadAction<Array<CharactersType>>,
     ): void => {
       state.isLoading = false;
       state.characters = action.payload;
@@ -35,11 +39,28 @@ const characters = createSlice({
 
     setSearchValue: (
       state: CharactersState,
-      action: PayloadAction<string>
+      action: PayloadAction<string>,
     ): void => {
       state.searchValue = action.payload;
-    }
-  }
+    },
+
+    fetchCharacterDetails: (
+      state: CharactersState,
+      _action: PayloadAction<string>,
+    ): void => {
+      state.isDetailsLoading = true;
+    },
+    fetchCharacterDetailsSuccess: (
+      state: CharactersState,
+      action: PayloadAction<CharacterDetailsType>,
+    ): void => {
+      state.characterDetails = action.payload;
+      state.isDetailsLoading = false;
+    },
+    fetchCharacterDetailsError: (state: CharactersState): void => {
+      state.isDetailsLoading = false;
+    },
+  },
 });
 
 export const { reducer, actions } = characters;

@@ -1,8 +1,8 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery } from 'redux-saga/effects';
 
-import { actions } from "./index";
-import Repository from "./Repository";
-import { CharactersType } from "../types";
+import { actions } from './index';
+import Repository from './Repository';
+import { CharactersType, CharacterDetailsType } from '../types';
 
 function* fetchCharacters() {
   try {
@@ -14,6 +14,22 @@ function* fetchCharacters() {
   }
 }
 
+function* fetchCharacterDetails(
+  action: ReturnType<typeof actions.fetchCharacterDetails>,
+) {
+  try {
+    const characterDetails: CharacterDetailsType = yield call(
+      Repository.fetchCharacter,
+      action.payload,
+    );
+
+    yield put(actions.fetchCharacterDetailsSuccess(characterDetails));
+  } catch (e) {
+    yield put(actions.fetchCharacterDetailsError());
+  }
+}
+
 export function* mySaga() {
-  yield takeEvery(actions.fetchCharacters, fetchCharacters);
+  yield takeEvery(actions.fetchCharacters.type, fetchCharacters);
+  yield takeEvery(actions.fetchCharacterDetails.type, fetchCharacterDetails);
 }
